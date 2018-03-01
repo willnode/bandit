@@ -10,26 +10,29 @@ body {
     min-width: 200px;
 }
 
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 0
+button {
+    margin: 0px;
 }
 
-#menu {
+#head {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#menu, #menu div {
     position: relative;
     display: inline-block;
 }
 
-#bar {
+#menu > button {
     background-color: #4CAF50;
     color: white;
-    padding: 16px;
+    padding: 5px;
     font-size: 16px;
     border: none;
 }
 
-#items {
+#menu div {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
@@ -38,38 +41,31 @@ ul {
     z-index: 1;
 }
 
-#items button {
-    color: black;
-    padding: 12px 16px;
-    display: block;
+#menu div div {
+    left: 100%;
+    top: 0;
 }
 
-#items button:hover {
+#menu button {
+    color: black;
+    padding: 5px 10px;
+    display: block;
+    width: 100%;
+}
+
+#menu button:hover {
     background-color: #ddd
 }
 
-#menu:hover #items {
+#menu .hov:hover + div, #menu div:hover {
     display: block;
 }
 
-#menu:hover #bar {
+#menu button:hover {
     background-color: #3e8e41;
 }
 
-ul li {
-    position: relative;
-    border: 1px solid #aaa;
-    border-top: none;
-    width: 148px;
-    margin: 0
-}
-
-ul li a {
-    display: block;
-    padding: 3px 7px 5px;
-    background-color: #d1d1d1
-}
-
-ul li a:hover {
-    background-color: #c5c5c5
+#cmd {
+    flex-grow: 1;
+    margin: 4px 4px;
 }

@@ -9,16 +9,13 @@
     <div id="app">
         <div id="head">
             <div id="menu">
-                <button id="bar">Operations</button>
-                <div id="items">
-                    <button>Base64ify</button>
-                    <button>Debase64ify</button>
-                    <button>Stringify</button>
-                    <button>Destringify</button>
-                </div>
+                <button class="hov">Encode</button>
+                <div id="menu-encode"></div>
+                <button class="hov">Decode</button>
+                <div id="menu-decode"></div>
             </div>
             <input id="cmd" name="cmd"></input>
-            <button class="btn" id="go" title="Load URL" style="margin-top:4px">
+            <button class="btn" id="go" title="Load URL">
                 <img src="images/load.png">
             </button>
         </div>
@@ -26,5 +23,6 @@
             <textarea id="text" name="text" rows=7 cols=82></textarea>
         </div>
     </div>
-    <script type="application/javascript" src="main.js"></script>
+    <script src="operations.js"></script>
+    <script src="main.js"></script>
 </body>
