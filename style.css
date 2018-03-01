@@ -84,7 +84,7 @@ button {
 }
 
 #cmd {
-    flex-grow: 2;
+    flex-grow: 10;
     margin: 0px 0px 0px 4px;
     font-family: 'Consolas', 'Courier New', Courier, monospace;
     min-width: 0px;
