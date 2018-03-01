@@ -6,32 +6,40 @@
     <link rel="stylesheet" href="style.css" type="text/css" />
     <script src="vue.min.js"></script>
 </head>
+
 <body>
     <div id="app">
-        <div id="head" style="width:82ch">
+        <div id="head" style="width:500px">
             <div id="menu">
                 <span v-for="(c, cc) in menu">
                     <button class="hov">{{cc}}</button>
                     <div>
                         <span v-for="(e, ee) in c">
                             <button v-if="typeof e === 'object'" class="hov">{{ee}}</button>
-                            <button v-else @click="cmd = e">{{ee}}</button>
+                            <button v-else @click="setCMD(e)">{{ee}}</button>
                             <div v-if="typeof e === 'object'">
-                                <button v-for="(d, dd) in e" @click="cmd = d">{{dd}}</button>
+                                <button v-for="(d, dd) in e" @click="setCMD(d)">{{dd}}</button>
                             </div>
                         </span>
                     </div>
                 </span>
             </div>
             <input id="cmd" v-model="cmd" name="cmd"></input>
-            <button class="btn" id="go" @click="go()" title="Load URL">
+            <button class="btn" id="go" @click="go()" title="Execute All">
+                <img src="images/load.png">
+            </button>
+            <button class="btn" id="go" @click="go()" title="Execute (per Line)">
+                <img src="images/load.png">
+            </button>
+            <button class="btn" id="go" @click="go()" title="Execute Selected">
                 <img src="images/load.png">
             </button>
         </div>
         <div id="body">
-            <textarea v-model="text" id="text" name="text" rows=7 cols=82></textarea>
+            <textarea v-model="text" id="text" name="text" rows=7 style="width:500px"></textarea>
         </div>
     </div>
+    <script src="extras.js"></script>
     <script src="operations.js"></script>
     <script src="main.js"></script>
 </body>

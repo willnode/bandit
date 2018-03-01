@@ -2,6 +2,12 @@
 var input, cmd, head, data = {
     text: '',
     cmd: '$',
+    autoExec: false,
+    setCMD: (c) => {
+        data.cmd = c;
+        if (data.autoExec)
+            data.go();
+    },
     menu: {
         encode: window.encode,
         decode: window.decode,
@@ -10,6 +16,12 @@ var input, cmd, head, data = {
     go: () => {
         window.$ = data.text;
         data.text = eval(`(${data.cmd || '$'})`);
+
+        // a hacky way to record undo
+        input.focus();
+        input.select();
+        document.execCommand("insertText", false, data.text);
+        input.select();
     }
 }
 
