@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
     <title>Bandit</title>
     <link rel="stylesheet" href="style.css" type="text/css" />
     <script src="vue.min.js"></script>
@@ -9,7 +10,7 @@
 
 <body>
     <div id="app">
-        <div id="head" style="width:500px">
+        <div id="head">
             <div id="menu">
                 <span v-for="(c, cc) in menu">
                     <button class="hov">{{cc}}</button>
@@ -24,19 +25,19 @@
                     </div>
                 </span>
             </div>
-            <input id="cmd" v-model="cmd" name="cmd"></input>
-            <button class="btn" id="go" @click="go()" title="Execute All">
-                <img src="images/load.png">
-            </button>
-            <button class="btn" id="go" @click="go()" title="Execute (per Line)">
-                <img src="images/load.png">
-            </button>
-            <button class="btn" id="go" @click="go()" title="Execute Selected">
-                <img src="images/load.png">
-            </button>
+            <input id="cmd" v-model="cmd" @change="goAll()" name="cmd"></input>
+            <span id="buttons">
+                <input type="checkbox" v-model="autoExec" title="Autoexecute All when template changed" style="align-self: center">
+                <button class="btn" id="go" @click="goAll()" title="Execute All">🔥👍</button>
+                <button class="btn" id="go" @click="goPerLine()" title="Execute (per Line)">🔥📜</button>
+                <button class="btn" id="go" @click="goSelected()" title="Execute Selected">🔥✂</button>
+                <button class="btn" id="go" @click="undo()" title="Undo">↩📝</button>
+                <button class="btn" id="go" @click="copy()" title="Copy">➡📎</button>
+                <button class="btn" id="go" @click="popout()" title="Open to Separate Tab">🔎↗</button>
+            </span>
         </div>
         <div id="body">
-            <textarea v-model="text" id="text" name="text" rows=7 style="width:500px"></textarea>
+            <textarea v-model="text" id="text" name="text" @change="save()"></textarea>
         </div>
     </div>
     <script src="extras.js"></script>
