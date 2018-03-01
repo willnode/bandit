@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+    <div id="app">
+        <div id="head">
+            <div id="menu">
+                <button id="bar">Operations</button>
+                <div id="items">
+                    <button>Base64ify</button>
+                    <button>Debase64ify</button>
+                    <button>Stringify</button>
+                    <button>Destringify</button>
+                </div>
+            </div>
+            <input id="cmd" name="cmd"></input>
+            <button class="btn" id="go" title="Load URL" style="margin-top:4px">
+                <img src="images/load.png">
+            </button>
+        </div>
+        <div id="body">
+            <textarea id="text" name="text" rows=7 cols=82></textarea>
+        </div>
+    </div>
+    <script type="application/javascript" src="main.js"></script>
+</body>
