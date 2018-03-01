@@ -19,12 +19,12 @@ button {
     flex-wrap: wrap;
 }
 
-#menu, #menu div {
-    position: relative;
-    display: inline-block;
+#menu {
+    flex-wrap: nowrap;
+    display: flex;
 }
 
-#menu > button {
+#menu > span > button {
     background-color: #4CAF50;
     color: white;
     padding: 5px;
@@ -68,4 +68,5 @@ button {
 #cmd {
     flex-grow: 1;
     margin: 4px 4px;
+    font-family: 'Consolas', 'Courier New', Courier, monospace;
 }

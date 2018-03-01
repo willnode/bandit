@@ -1,33 +1,29 @@
 window.encode = {
     "Encryption": {
-        "Base64": `btoa($1)`,
-        "SHA1": `btoa($1)`,
-        "MD5": `btoa($1)`,
-        "ROT13": `btoa($1)`,
+        "Base64": `btoa($)`,
+        "SHA1": `sha1($)`,
+        "MD5": `md5($)`,
+        "ROT13": `rot13($)`,
     },
     "URI": {
-        "Full": ``,
-        "Escape": `escape($1)`,
-        "URI": `encodeURI($1)`,
-        "URI Component": `encodeURIComponent($1)`,
+        "Full": `escapeall($)`,
+        "Escape": `escape($)`,
+        "URI": `encodeURI($)`,
+        "URI Component": `encodeURIComponent($)`,
     },
-    "String": `'"' + $1.replace(/"/g, '\\"') + '"'`,
-}
+    "String": `'"' + $.replace(/"/g, '\\"') + '"'`,
+};
+
 window.decode = {
     "Base64": ``,
     "URI": {
-        "Full": ``,
-        "Escape": `escape($1)`,
-        "URI": `encodeURI($1)`,
-        "URI Component": `encodeURIComponent($1)`,
+        "Escape": `escape($)`,
+        "URI": `encodeURI($)`,
+        "URI Component": `encodeURIComponent($)`,
     },
-    "Hex": {
+    "String": `'"' + $.replace(/"/g, '\\"') + '"'`,
+};
 
-    },
-    "String": `'"' + $1.replace(/"/g, '\\"') + '"'`,
-}
 window.template = {
-
-}
-
-String.fromCharCode()
+    "String.fromCharCode": `$`,
+};
