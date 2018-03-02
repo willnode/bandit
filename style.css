@@ -60,6 +60,7 @@ button {
 #menu div div {
     left: 100%;
     top: 0;
+    bottom: 0;
 }
 
 #menu button {
@@ -98,4 +99,11 @@ button {
 #buttons button {
     font-size: 16px;
     flex-grow: 1;
+}
+
+#menu div .hov::after {
+    content:'>';
+    position:relative;
+    left:10px;
+    font-size:10px;
 }
