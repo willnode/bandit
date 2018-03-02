@@ -344,6 +344,8 @@ var entityMap = {
     '=': '&#x3D;'
 };
 
+var sanitize = str => str.replace(/[&<>"'\`=\\/]/g, s => entityMap[s]);
+
 var loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \
 Vestibulum nec ultricies tortor. Phasellus at rutrum eros. Class aptent tac\
 iti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.\

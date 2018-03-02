@@ -15,6 +15,8 @@ body {
 
 #body {
     margin-top: 4px;
+    position: relative;
+    overflow: hidden;
 }
 
 #text {
@@ -36,11 +38,11 @@ button {
     display: flex;
 }
 
-#menu > span {
+#menu>span {
     flex-grow: 1;
 }
 
-#menu > span > button {
+#menu>span>button {
     background-color: var(--bg);
     color: white;
     padding: 5px;
@@ -75,7 +77,8 @@ button {
     background-color: #ddd
 }
 
-#menu:not([disabled]) .hov:hover + div, #menu:not([disabled]) div:hover {
+#menu:not([disabled]) .hov:hover+div,
+#menu:not([disabled]) div:hover {
     display: block;
 }
 
@@ -102,8 +105,31 @@ button {
 }
 
 #menu div .hov::after {
-    content:'>';
-    position:relative;
-    left:10px;
-    font-size:10px;
+    content: '>';
+    position: relative;
+    left: 10px;
+    font-size: 10px;
+}
+
+#holder, #text {
+    padding: 2px;
+    font: 400 13.3333px monospace;
+    border: 1px solid #a9a9a9;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+#holder {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: transparent;
+    pointer-events: none;
+    border-color: transparent;
+}
+
+#holder span {
+    background-color: #c8c8c8;
+    color: black;
 }

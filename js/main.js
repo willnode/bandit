@@ -1,5 +1,5 @@
 
-var input, cmd, head, data = {
+var input, cmd, head, mask, data = {
     text: localStorage["bandit-text"] || '',
     cmd: localStorage["bandit-cmd"] || '$',
     autoExec: !!localStorage["bandit-autoexec"],
@@ -72,6 +72,7 @@ var input, cmd, head, data = {
     },
     save: () => {
         localStorage["bandit-text"] = data.text;
+        syncSize();
     },
     popout: () => {
         window.open('/index.html', '_blank');
@@ -81,15 +82,17 @@ var input, cmd, head, data = {
 var app = new Vue({
     el: '#app',
     data: data,
-})
+});
 
 input = document.getElementById('text');
 head = document.getElementById('head');
+mask = document.getElementById('holder');
 
-function syncSize() {
-    head.style.width = input.style.width;
-    localStorage["bandit-width"] = input.style.width;
-    localStorage["bandit-height"] = input.style.height;
+syncSize = () => {
+    mask.style.width = (input.scrollWidth + 2) + "px";
+    mask.style.top = (-input.scrollTop) + "px";
+    localStorage["bandit-width"] = head.style.width = input.style.width;
+    localStorage["bandit-height"] = mask.style.height = input.style.height;
 }
 
 new MutationObserver(syncSize).observe(input, {
@@ -97,5 +100,21 @@ new MutationObserver(syncSize).observe(input, {
     attributeFilter: ["style"]
 })
 
+syncSize();
+
 input.style.width = localStorage["bandit-width"] || '500px';
 input.style.height = localStorage["bandit-height"] || '7em';
+
+input.onblur = function () {
+    var start = input.selectionStart;
+    var end = input.selectionEnd;
+    var text = data.text;
+    mask.innerHTML = sanitize(text.substring(0, start)) +
+        "<span>" + sanitize(text.substring(start, end)) +
+        "</span>" + sanitize(text.substring(end));
+    mask.style.display = "block";
+}
+
+input.onfocus = () => mask.style.removeProperty('display');
+
+input.onscroll = () => mask.style.top = -input.scrollTop + "px";
