@@ -6,8 +6,7 @@
    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
    "description": "The swiss army for hacking tools",
    "icons": {
-      "18": "images/icon.png",
-      "128": "images/evil-icons.png"
+      "128": "images/icon.png"
    },
   "manifest_version": 2,
    "name": "Bandit",
