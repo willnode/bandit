@@ -5,11 +5,11 @@
    },
    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
    "description": "The swiss army for hacking tools",
+   "homepage_url": "https://github.com/willnode/bandit/",
    "icons": {
       "128": "images/icon.png"
    },
   "manifest_version": 2,
    "name": "Bandit",
-   "permissions": [ "tabs", "cookies", "activeTab", "\u003Call_urls>", "*://*/*", "background", "webRequest", "webRequestBlocking" ],
    "version": "0.2.0"
 }
