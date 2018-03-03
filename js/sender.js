@@ -83,7 +83,18 @@ var send = (cors) => {
     xhr.send(req.body);
 }
 
+var popout = (url) => {
+    if (window.opened && !window.opened.closed) {
+        opened.location = url;
+        opened.focus();
+    }
+    else
+        window.opened = window.open(url, '_blank', undefined, true);
+}
+
 document.getElementById('xhr').onclick = () => send();
+
+document.getElementById('open').onclick = () => popout(parse(input.value).url);
 
 reqCors.onclick = () => {
     var proxy = localStorage['cors'] || '';

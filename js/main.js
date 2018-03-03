@@ -16,6 +16,7 @@ var input, cmd, head, mask, data = {
             setTimeout(() => data.killTheMenu = false, 300);
         }
     },
+    immersive: location.hash === '#immersive',
     killTheMenu: false,
     menu: {
         encode: window.encode,
@@ -75,7 +76,10 @@ var input, cmd, head, mask, data = {
         syncSize();
     },
     popout: () => {
-        window.open('/index.html', '_blank');
+        window.open('/index.html#immersive', '_blank');
+    },
+    send: () => {
+        window.open('/send.html', '_blank');
     }
 }
 

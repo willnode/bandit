@@ -27,12 +27,13 @@
             <input id="cmd" v-model="cmd" @change="goAll()" name="cmd"></input>
             <span id="buttons">
                 <input type="checkbox" v-model="autoExec" title="Autoexecute All when template changed" style="align-self: center">
-                <button class="btn" id="go" @click="goAll()" title="Execute All">🔥👍</button>
-                <button class="btn" id="go" @click="goPerLine()" title="Execute (per Line)">🔥📜</button>
-                <button class="btn" id="go" @click="goSelected()" title="Execute Selected">🔥✂</button>
-                <button class="btn" id="go" @click="undo()" title="Undo">↩📝</button>
-                <button class="btn" id="go" @click="copy()" title="Copy">➡📎</button>
-                <button class="btn" id="go" @click="popout()" title="Open to Separate Tab">🔎↗</button>
+                <button class="btn" @click="goAll()" title="Execute All">🔥👍</button>
+                <button class="btn" @click="goPerLine()" title="Execute (per Line)">🔥📜</button>
+                <button class="btn" @click="goSelected()" title="Execute Selected">🔥✂</button>
+                <button class="btn" @click="undo()" title="Undo">↩📝</button>
+                <button class="btn" @click="copy()" title="Copy">➡📎</button>
+                <button v-if='!immersive' class="btn" @click="popout()" title="Open to Separate Tab">🔎↗</button>
+                <button v-if='immersive' class="btn" @click="send()" title="Send for XHR request">🌐↗</button>
             </span>
         </div>
         <div id="body">
