@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0px;
+}
+
+pre {
+    white-space: pre-wrap;
+    font-size: 12px;
+}
+
+textarea {
+    resize: none;
+    display: flex;
+    flex-grow: 1;
+}
+
+#body {
+    display: flex;
+}
+
+#request {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+#res-head {
+    color: dimgray;
+}
+
+#buttons {
+    flex-direction: row;
+    display: flex;
+}
+
+#response {
+    height: 100vh;
+    flex-grow: 2;
+    flex-basis: 0;
+    overflow-y: scroll;
+    margin-left: 20px;
+}
+
+.hidden {
+    display: none;
+}
