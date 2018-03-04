@@ -1,8 +1,14 @@
-# Bandit v0.2.0 Alpha
+# Bandit v0.3.0 Alpha
 
 This is a chrome extension similar to Hackbar, but with different design aimed for flexibility.
 
-Suitable for Pentesting tools or quick notes and javascript manipulation.
+Suitable for Pentesting website and API manipulations.
+
+## Features
+
++ Open as popup or tabpage
++ [Lots of options](js/operations.js)
++ A dedicated page for [testing web request](send.html)
 
 ## Install
 

@@ -33,7 +33,7 @@
                 <button class="btn" @click="undo()" title="Undo">↩📝</button>
                 <button class="btn" @click="copy()" title="Copy">➡📎</button>
                 <button v-if='!immersive' class="btn" @click="popout()" title="Open to Separate Tab">🔎↗</button>
-                <button v-if='immersive' class="btn" @click="send()" title="Send for XHR request">🌐↗</button>
+                <button v-else class="btn" @click="send()" title="Send for XHR request">🌐↗</button>
             </span>
         </div>
         <div id="body">
