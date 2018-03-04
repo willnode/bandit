@@ -10,21 +10,22 @@
 </head>
 
 <body>
-    <div id="body" class="split horizontal">
+    <div id="body">
         <div id="request">
             <div id="buttons">
-                <button id="xhr">SEND AS XHR</button>
-                <button id="open">SEND AS HTTP</button>
+                <button @click="send()" id="xhr">SEND AS XHR</button>
+                <button @click="popout()" id="open">SEND AS HTTP</button>
             </div>
-            <textarea id="text"></textarea>
+            <textarea id="text" v-model="input"></textarea>
         </div>
         <div id="response">
-            <button id="cors" class="hidden">BYPASS CORS</button>
-            <button id="pop" class="hidden">POP RESULT IN NEWTAB</button>
+            <button v-if="showcors" id="cors" @click="cors()">BYPASS CORS</button>
+            <button v-if="showblobout" id="pop" @click="blobout()">POP RESULT IN NEWTAB</button>
             <pre id="res-head"></pre>
             <pre id="res-body"></pre>
         </div>
     </div>
+    <script src="js/vue.min.js"></script>
     <script src="js/sender.js"></script>
 </body>
 

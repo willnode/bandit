@@ -18,6 +18,7 @@ window.encode = {
     },
     "Javascript": {
         "JSON": `JSON.stringify($)`,
+        "GraphQL": `JSON.stringify({query:$,variables:{}})`,
         "Hex": `[...$].map(x => '\\\\x' + x.charCodeAt(0).toString(16).padStart(2, "0")).join('')`,
         "Unicode": `[...$].map(x => '\\\\u' + x.charCodeAt(0).toString(16).padStart(4, "0")).join('')`,
         "Numbers": `'[' + [...$].map(x => x.charCodeAt(0).toString()).join(', ') + ']'`,
@@ -33,7 +34,8 @@ window.decode = {
     },
     "HTML": `new DOMParser().parseFromString($, 'text/html').documentElement.textContent`,
     "Javascript": {
-        "JSON": "JSON.parse($)",
+        "JSON": `JSON.parse($)`,
+        "GraphQL": `JSON.parse($).query`,
         "Unslash": `eval('"' + $.replace(/"/g, '\\\\"') + '"')`,
         "CSV Numbers": `String.fromCharCode(...$.replace(/[^0-9,]/g, '').split(','))`,
     }
