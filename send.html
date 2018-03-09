@@ -15,12 +15,25 @@
             <div id="buttons">
                 <button @click="send()" id="xhr">SEND AS XHR</button>
                 <button @click="popout()" id="open">SEND AS HTTP</button>
+                <span class="wide"></span>
+                <button @click="showProxy = !showProxy">BANDIT PROXY OPTIONS</button>
+            </div>
+            <div v-if="showProxy">
+                <span>
+                    <a href="https://github.com/willnode/bandit-proxy/" target="_blank">Bandit Proxy URL:</a>
+                </span>
+                <input v-model="proxyUrl" class="wide" placeholder="Enter proxy URL here (e.g. 'http://localhost:7070/')">
+            </div>
+            <div v-if="proxyUrl && showProxy">
+                <input type="checkbox" id="enableProxy" v-model="enableProxy">
+                <label for="enableProxy">Enable Proxy</label>
+                <input type="checkbox" id="cleanProxy" v-model="cleanProxy">
+                <label for="cleanProxy" title="This will strip built-in HTTP Headers filled by the browser (So only custom headers that will send)">Strip Browser HTTP Heads</label>
             </div>
             <textarea id="text" v-model="input"></textarea>
         </div>
         <div id="response">
-            <button v-if="showcors" id="cors" @click="cors()">BYPASS CORS</button>
-            <button v-if="showblobout" id="pop" @click="blobout()">POP RESULT IN NEWTAB</button>
+            <button v-if="showBlobOut" id="pop" @click="blobout()">POP RESULT IN NEWTAB</button>
             <pre id="res-head"></pre>
             <pre id="res-body"></pre>
         </div>

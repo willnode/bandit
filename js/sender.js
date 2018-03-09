@@ -2,27 +2,31 @@ var httpWords = ['GET', 'POST', 'HEAD', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS']
 
 var data = {
     input: localStorage['bandit-xhr'] || '',
-    showcors: false,
-    showblobout: false,
-    send: () => send(),
+    proxyUrl: localStorage['bandit-proxy'] || '',
+    showProxy: localStorage['bandit-proxyShow'] || false,
+    enableProxy: localStorage['bandit-proxyEnable'] || true,
+    cleanProxy: localStorage['bandit-proxyClean'] || false,
+    showBlobOut: false,
+    send: () => send(data.enableProxy ? data.proxyUrl : ''),
     popout: () => {
-        var url = parse(localStorage['bandit-xhr'] = data.input).url;
+        var url = parse(data.input).url;
         if (window.opened && !window.opened.closed) {
             opened.location = url;
             opened.focus();
         }
         else
             window.opened = window.open(url, '_blank', undefined, true);
+        save();
     },
     blobout: () => window.open(obj, '_blank'),
-    cors: () => {
-        var proxy = localStorage['bandit-cors'] || '';
-        if (!proxy)
-            proxy = prompt("Enter CORS proxy URL\nYou can edit this later via localStorage", "");
-        if (!proxy) return;
+}
 
-        send(localStorage['bandit-cors'] = proxy.slice(-1) === '/' ? proxy : proxy + '/');
-    }
+save = function () {
+    localStorage['bandit-xhr'] = data.input;
+    localStorage['bandit-proxy'] = data.proxyUrl;
+    localStorage['bandit-proxyShow'] = data.showProxy;
+    localStorage['bandit-proxyEnable'] = data.enableProxy;
+    localStorage['bandit-proxyClean'] = data.cleanProxy;
 }
 
 new Vue({
@@ -77,40 +81,48 @@ function parse(word) {
     };
 }
 
-String.prototype.split2 = function(sep) {
+String.prototype.split2 = function (sep) {
     var split = this.split(sep);
     return [split[0], split.length > 1 ? split.slice(1).join(sep) : ''];
 }
 
-function mount(obj, type) {
-    if (window.obj)
-        URL.revokeObjectURL(window.obj);
-    return window.obj = URL.createObjectURL(new Blob(typeof obj === 'string' ? [obj] : obj, { type: type || `*/*` }));
-}
-
-var send = (cors) => {
-    var req = parse(localStorage['bandit-xhr'] = data.input);
+var send = (proxy) => {
+    save();
+    var req = parse(data.input);
     if (!req) return;
 
-    data.showcors = false; data.showblobout = false;
+    data.showBlobOut = false;
 
-    var xhr = new XMLHttpRequest();
-    xhr.open(req.method, (cors || '') + req.url);
-    if (req.head)
+    var xhr = window.xhr = new XMLHttpRequest();
+    xhr.open(req.method, (proxy || '') + req.url);
+    if (data.proxyUrl && data.enableProxy) {
+        if (data.cleanProxy)
+            xhr.setRequestHeader('x--custom', 'yes');
+        if (req.head)
+            for (const head in req.head)
+                xhr.setRequestHeader('x--' + head, req.head[head]);
+    } else if (req.head) {
         for (const head in req.head)
-           xhr.setRequestHeader(head, req.head[head]);
+            xhr.setRequestHeader(head, req.head[head]);
+    }
 
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
-            if (xhr.status === 0) {
-                data.showcors = true;
-                if (localStorage['auto-cors'] && !cors)
-                    data.cors();
-            }
-            else
-                data.showblobout = true;
+            if (xhr.status !== 0)
+                data.showBlobOut = true;
 
-            reqHead.innerText = `${xhr.status} ${xhr.statusText}\n${xhr.getAllResponseHeaders()}`;
+            var head;
+            try {
+                if (!(head = xhr.getResponseHeader('x-raw-head')))
+                    throw 'e';
+                var heads = JSON.parse(head);
+                head = "";
+                Object.keys(heads).forEach(k => head += k + ': ' + heads[k] + '\n');
+            } catch (e) {
+                head = xhr.getAllResponseHeaders();
+            }
+
+            reqHead.innerText = `${xhr.status} ${xhr.statusText}\n${head}`;
             var type = xhr.getResponseHeader('content-type') || '*/*';
             mount(xhr.response, type);
             reqBody.innerText = xhr.response;
@@ -119,3 +131,8 @@ var send = (cors) => {
     xhr.send(req.body);
 }
 
+function mount(obj, type) {
+    if (window.obj)
+        URL.revokeObjectURL(window.obj);
+    return window.obj = URL.createObjectURL(new Blob(typeof obj === 'string' ? [obj] : obj, { type: type || `*/*` }));
+}

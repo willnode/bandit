@@ -28,6 +28,16 @@ textarea {
     flex-basis: 0;
 }
 
+#request > div {
+    display: flex;
+    margin: 2px 0px;
+}
+
+#request a {
+    margin: auto 3px;
+    vertical-align: middle;
+}
+
 #res-head {
     color: dimgray;
 }
@@ -48,3 +58,8 @@ textarea {
 .hidden {
     display: none;
 }
+
+.wide {
+    flex-grow: 1;
+}
+
