@@ -1,8 +1,12 @@
 # Bandit v0.3.0 Alpha
 
+## [👉 Try in your Browser](//wellosoft.net/bandit/#immersive)
+
 This is a chrome extension similar to Hackbar, but with different design aimed for flexibility.
 
 Suitable for Pentesting website and API manipulations.
+
+Because this extension don't much using Chrome-specific features, you also [try it right in the browser](//wellosoft.net/bandit/#immersive).
 
 ## Features
 

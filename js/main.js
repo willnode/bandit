@@ -76,10 +76,10 @@ var input, cmd, head, mask, data = {
         syncSize();
     },
     popout: () => {
-        window.open('/index.html#immersive', '_blank');
+        window.open('index.html#immersive', '_blank');
     },
     send: () => {
-        window.open('/send.html', '_blank');
+        window.open('send.html', '_blank');
     }
 }
 
