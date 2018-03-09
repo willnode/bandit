@@ -52,7 +52,7 @@ function parse(word) {
         // parse just like usual HTTP request
         var section = word.substr(i).split2('\n');
         var section2 = section[1].split2('\n\n');
-        url = section[0].trim();
+        url = section[0].trim().replace(/ HTTP\/\d\.\d$/, "");
         head = section2[0];
         body = section2[1];
     } else {
