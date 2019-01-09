@@ -24,7 +24,47 @@ body {
     min-height: 150px;
 }
 
+#head {
+    display: flex;
+}
+
+#head input {
+    flex-grow: 1;
+}
+
+.tabs {
+    text-align: center;
+}
+.tabs button {
+    background-color: whitesmoke;
+}
+.tabs button.active {
+    background-color: white;
+    font-weight: bold;
+}
+
 button {
+    border: 1px solid white;
+    cursor: pointer;
+    padding: 5px;
+}
+
+button:hover {
+    background-color: darkgray;
+}
+
+#menu {
+    display: flex;
+    flex-direction: column;
+}
+
+#menu .section {
+    padding: 0px 5px;
+}
+
+
+
+/* button {
     margin: 0px;
 }
 
@@ -109,7 +149,7 @@ button {
     position: relative;
     left: 10px;
     font-size: 10px;
-}
+} */
 
 #holder, #text {
     padding: 2px;

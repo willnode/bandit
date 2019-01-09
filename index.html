@@ -9,22 +9,24 @@
 
 <body>
     <div id="app">
-        <div id="head">
-            <div id="menu" :disabled="killTheMenu">
-                <span v-for="(c, cc) in menu">
-                    <button class="hov">{{cc}}</button>
-                    <div>
-                        <span v-for="(e, ee) in c">
-                            <button v-if="typeof e === 'object'" class="hov">{{ee}}</button>
-                            <button v-else @click="setCMD(e)">{{ee}}</button>
-                            <div v-if="typeof e === 'object'">
-                                <button v-for="(d, dd) in e" @click="setCMD(d)">{{dd}}</button>
-                            </div>
+        <div id="menu">
+            <div class="tabs">
+                <button v-for="(c, cc) in menu" :class="{active: activeTab==cc}" @click="activeTab=cc">{{cc}}</button>
+            </div>
+            <span v-for="(c, cc) in menu">
+                <span v-if="activeTab==cc">
+                    <div v-for="(e, ee) in c">
+                        <span v-if="typeof e === 'object'" class="section">{{ee}}</span>
+                        <button v-else @click="setCMD(e)">{{ee}}</button>
+                        <span v-if="typeof e === 'object'">
+                            <button v-for="(d, dd) in e" @click="setCMD(d)">{{dd}}</button>
                         </span>
                     </div>
                 </span>
-            </div>
-            <input id="cmd" v-model="cmd" @change="goAll()" name="cmd"></input>
+            </span>
+        </div>
+        <div id="head">
+            <input id="cmd" v-model="cmd" @change="goAll()" name="cmd">
             <span id="buttons">
                 <input type="checkbox" v-model="autoExec" title="Autoexecute All when template changed" style="align-self: center">
                 <button class="btn" @click="goAll()" title="Execute All">🔥👍</button>
@@ -32,8 +34,8 @@
                 <button class="btn" @click="goSelected()" title="Execute Selected">🔥✂</button>
                 <button class="btn" @click="undo()" title="Undo">↩📝</button>
                 <button class="btn" @click="copy()" title="Copy">➡📎</button>
-                <button v-if='!immersive' class="btn" @click="popout()" title="Open to Separate Tab">🔎↗</button>
-                <button v-else class="btn" @click="send()" title="Send for XHR request">🌐↗</button>
+                <!-- >button v-if='!immersive' class="btn" @click="popout()" title="Open to Separate Tab">🔎↗</button>
+                <button v-else class="btn" @click="send()" title="Send for XHR request">🌐↗</button-->
             </span>
         </div>
         <div id="body">

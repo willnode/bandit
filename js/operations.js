@@ -21,18 +21,21 @@ window.encode = {
         "GraphQL": `JSON.stringify({query:$,variables:{}})`,
         "Hex": `[...$].map(x => '\\\\x' + x.charCodeAt(0).toString(16).padStart(2, "0")).join('')`,
         "Unicode": `[...$].map(x => '\\\\u' + x.charCodeAt(0).toString(16).padStart(4, "0")).join('')`,
-        "Numbers": `'[' + [...$].map(x => x.charCodeAt(0).toString()).join(', ') + ']'`,
+        "Arr Numbers": `'[' + [...$].map(x => x.charCodeAt(0).toString()).join(', ') + ']'`,
     }
 };
 
 window.decode = {
-    "Base64": `atob($)`,
     "URI": {
         "Unescape": `unescape($)`,
         "URI": `decodeURI($)`,
         "URI Component": `decodeURIComponent($)`,
     },
-    "HTML": `new DOMParser().parseFromString($, 'text/html').documentElement.textContent`,
+    "Parse": {
+        "Base64": `atob($)`,
+        "HTML": `new DOMParser().parseFromString($, 'text/html').documentElement.textContent`,
+        "JS": `eval('('+$+')')`,
+    },
     "Javascript": {
         "JSON": `JSON.parse($)`,
         "GraphQL": `JSON.parse($).query`,

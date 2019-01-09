@@ -1,5 +1,5 @@
 
-var input, cmd, head, mask, data = {
+var input, cmd, app, mask, data = {
     text: localStorage["bandit-text"] || '',
     cmd: localStorage["bandit-cmd"] || '$',
     autoExec: !!localStorage["bandit-autoexec"],
@@ -10,14 +10,10 @@ var input, cmd, head, mask, data = {
                 data.goAll();
             else
                 data.goSelected();
-
-            // a hacky way to close the menu
-            data.killTheMenu = true;
-            setTimeout(() => data.killTheMenu = false, 300);
         }
     },
     immersive: location.hash === '#immersive',
-    killTheMenu: false,
+    activeTab: 'encode',
     menu: {
         encode: window.encode,
         decode: window.decode,
@@ -89,13 +85,13 @@ var app = new Vue({
 });
 
 input = document.getElementById('text');
-head = document.getElementById('head');
+app = document.getElementById('app');
 mask = document.getElementById('holder');
 
 syncSize = () => {
     mask.style.width = (input.scrollWidth + 2) + "px";
     mask.style.top = (-input.scrollTop) + "px";
-    localStorage["bandit-width"] = head.style.width = input.style.width;
+    localStorage["bandit-width"] = app.style.width = input.style.width;
     localStorage["bandit-height"] = mask.style.height = input.style.height;
 }
 
@@ -122,3 +118,12 @@ input.onblur = function () {
 input.onfocus = () => mask.style.removeProperty('display');
 
 input.onscroll = () => mask.style.top = -input.scrollTop + "px";
+
+window.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.keyCode == 13) {
+        data.goAll();
+    } else {
+        return;
+    }
+    e.preventDefault();
+});
